@@ -19,6 +19,10 @@
 function result(data){
 	$("#display").html(data);
 }
+function deleteStudent(){
+	var id=$("#sid").val();
+	$.post("deleteStudentServlet",{"sid":id},result)	
+}
 function addStudent(){
 	var id=$("#sid").val();
 	var name=$("#sname").val();
@@ -38,6 +42,7 @@ function start(){
 	$("#query").click(getAll);
 	$("#modify").click(updateStudent);
 	$("#add").click(addStudent);
+	$("#delete").click(deleteStudent);
 }
 $(document).ready(start);
 </script>
