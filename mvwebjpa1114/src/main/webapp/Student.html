@@ -6,18 +6,24 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
-<body>
+<body><h2>
 		Student No:<input type="text" id="sid" value="201" /> <br />
 		Student Name:<input type="text" id="sname" value="Mary" /><br />
 		Student Age:<input type="text" id="age" value="20" /><br />
 		<input type="button" id="query" value="Get All Students" />
+		<input type="button" id="queryAge" value="Query Students By Age "/>
 		<input type="button" id="modify" value="Update Students Data" />
 		<input type="button" id="add" value="add Students Data" />
 		<input type="button" id="delete" value="Delete Students" />
 <div id="display"></div>
+</h2>
 <script>
 function result(data){
 	$("#display").html(data);
+}
+function queryAge(){
+	    var ag=$("#age").val();
+    $.get("QueryAgeServlet",{"age":ag},result)
 }
 function deleteStudent(){
 	var id=$("#sid").val();
@@ -43,6 +49,7 @@ function start(){
 	$("#modify").click(updateStudent);
 	$("#add").click(addStudent);
 	$("#delete").click(deleteStudent);
+	$("#queryAge").click(queryAge);
 }
 $(document).ready(start);
 </script>
