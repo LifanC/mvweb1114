@@ -15,11 +15,46 @@
 		<input type="button" id="modify" value="Update Students Data" />
 		<input type="button" id="add" value="add Students Data" />
 		<input type="button" id="delete" value="Delete Students" />
+		<input type="button" id="queryRS" value="RS Get All Students"/><p>
 <div id="display"></div>
+<table border="1" style="width: 70%">
+     <thead>
+          <tr>
+               <th>Student ID</th>
+               <th>Student Name</th>             
+               <th>Age</th>               
+           </tr>
+     </thead>
+     <tbody id="tbody">
+     </tbody>
+    </table>
 </h2>
 <script>
 function result(data){
 	$("#display").html(data);
+}
+function queryRS(){
+	 $.ajax({
+        url:'student/getAll',
+        type :'get',
+        cache: false,
+        datatype:"application/json",
+       success : function(data) 
+       {  
+       	$('#tbody').empty();          	  
+       	$.each(data, function (index, item) {
+       	     var eachrow = "<tr>"
+       	                 + "<td>" + item.sid + "</td>"
+       	                 + "<td>" + item.sname + "</td>"
+       	                 + "<td>" + item.age + "</td>"            	                           
+       	                 + "</tr>";
+       	     $('#tbody').append(eachrow);
+       	});  
+       },error: function(data) 
+       {
+          console.log('無法送出');
+       }
+ });
 }
 function queryAge(){
 	    var ag=$("#age").val();
@@ -50,6 +85,7 @@ function start(){
 	$("#add").click(addStudent);
 	$("#delete").click(deleteStudent);
 	$("#queryAge").click(queryAge);
+	$("#queryRS").click(queryRS);
 }
 $(document).ready(start);
 </script>
