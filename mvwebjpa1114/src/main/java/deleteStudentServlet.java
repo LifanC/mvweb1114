@@ -42,6 +42,22 @@ public class deleteStudentServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
+		String sid=request.getParameter("sid");
+		EntityManagerFactory factory=Persistence.createEntityManagerFactory("mvwebjpa1114");
+		EntityManager manager=factory.createEntityManager();
+		manager.getTransaction().begin();
+		Student sx=manager.find(Student.class, Integer.parseInt(sid));
+		 if(sx !=null) {        	
+	         manager.remove(sx);   
+			 manager.getTransaction().commit();
+	        }else {
+	          System.out.println("student not found");
+	          manager.getTransaction().rollback();
+		    }        
+		    manager.close();
+	        factory.close();
+	        response.sendRedirect("StudentServlet");
+		/*
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("mvwebjpa1114");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
@@ -56,7 +72,7 @@ public class deleteStudentServlet extends HttpServlet {
         em.close();
         emf.close();
         response.sendRedirect("StudentServlet");
-
+		*/
         
 	}
 
