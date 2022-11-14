@@ -48,11 +48,13 @@ public class addStudentServlet extends HttpServlet {
         String sid=request.getParameter("sid");
         String sname=request.getParameter("sname");
         String age=request.getParameter("age");
-        Student s1 = new Student();
+        Student s = new Student(Integer.parseInt(sid),sname,Integer.parseInt(age));
+        /*
         s1.setSid(Integer.parseInt(sid));
         s1.setSname(sname);
         s1.setAge(Integer.parseInt(age));
-        em.persist(s1);
+        */
+        em.persist(s);
         em.getTransaction().commit();
         em.close();
         emf.close();
