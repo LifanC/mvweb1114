@@ -12,11 +12,18 @@
 		Student Age:<input type="text" id="age" value="20" /><br />
 		<input type="button" id="query" value="Get All Students" />
 		<input type="button" id="modify" value="Update Students Data" />
+		<input type="button" id="add" value="add Students Data" />
 		<input type="button" id="delete" value="Delete Students" />
 <div id="display"></div>
 <script>
 function result(data){
 	$("#display").html(data);
+}
+function addStudent(){
+	var id=$("#sid").val();
+	var name=$("#sname").val();
+	var ag=$("#age").val();
+	$.post("addStudentServlet",{"sid":id,"sname":name,"age":ag},result)
 }
 function updateStudent(){
 	var id=$("#sid").val();
@@ -30,6 +37,7 @@ function getAll(){
 function start(){
 	$("#query").click(getAll);
 	$("#modify").click(updateStudent);
+	$("#add").click(addStudent);
 }
 $(document).ready(start);
 </script>
