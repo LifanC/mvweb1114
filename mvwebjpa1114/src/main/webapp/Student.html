@@ -15,7 +15,8 @@
 		<input type="button" id="modify" value="Update Students Data" />
 		<input type="button" id="add" value="add Students Data" />
 		<input type="button" id="delete" value="Delete Students" />
-		<input type="button" id="queryRS" value="RS Get All Students"/><p>
+		<input type="button" id="queryRS" value="RS Get All Students"/>
+		<input type="button" id="addRS" value="RS add a Student" /><p>
 <div id="display"></div>
 <table border="1" style="width: 70%">
      <thead>
@@ -33,6 +34,27 @@
 function result(data){
 	$("#display").html(data);
 }
+function addRS(){
+    var obj={};
+    obj.sid=$("#sid").val();
+    obj.sname=$("#sname").val();
+    obj.age=$("#age").val();
+    $.ajax({
+        url:'student/addStudent',
+        type :'post',
+        data : JSON.stringify(obj),
+        contentType:"application/json",
+        cache: false,          
+        datatype:"text/html",
+       success : function(data) 
+       { 
+       	alert(data);  
+       },error: function(data) 
+       {
+          console.log('無法送出');
+       }
+    });
+  }
 function queryRS(){
 	 $.ajax({
         url:'student/getAll',
@@ -86,6 +108,7 @@ function start(){
 	$("#delete").click(deleteStudent);
 	$("#queryAge").click(queryAge);
 	$("#queryRS").click(queryRS);
+	$("#addRS").click(addRS);
 }
 $(document).ready(start);
 </script>
